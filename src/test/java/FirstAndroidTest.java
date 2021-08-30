@@ -35,28 +35,7 @@ public class FirstAndroidTest {
     @Test
     public void add_plant_test() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-
-        MobileElement plantList = (MobileElement) driver.findElementByAccessibilityId("Plant list");
-        MobileElement myGarden = (MobileElement) driver.findElementByAccessibilityId("My garden");
-
-        wait.until(ExpectedConditions.elementToBeClickable(plantList)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(myGarden)).click();
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(addPlant)).click();
-        List <MobileElement> listElements = driver.findElements(By.id("plant_item_title"));
-        for(MobileElement el : listElements){
-            if(el.getText().equalsIgnoreCase("Avocado")){
-               el.click();
-               break;
-            }
-        }
-        wait.until(ExpectedConditions.presenceOfElementLocated(add)).click();
-        driver.navigate().back();
-        driver.findElementByAccessibilityId("My garden").click();
-        By plant_name =  By.id("plant_name");
-        wait.until(ExpectedConditions.presenceOfElementLocated(plant_name));
-        Assert.assertTrue(driver.findElement(plant_name).getAttribute("text")
-                .equalsIgnoreCase("Avocado"));
+        System.out.println("Session Id :+"+driver.getSessionId());
     }
 
     @AfterTest
