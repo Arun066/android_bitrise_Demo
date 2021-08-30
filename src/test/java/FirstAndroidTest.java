@@ -33,9 +33,20 @@ public class FirstAndroidTest {
     }
 
     @Test
-    public void add_plant_test() {
+    public void test1() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        System.out.println("Session Id :+"+driver.getSessionId());
+        System.out.println("Session Id1 :+"+driver.getSessionId());
+    }
+
+    @Test
+    public void test2() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        System.out.println("Session Id2 :+"+driver.getSessionId());
+    }
+    @Test
+    public void test3() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        System.out.println("Session Id3 :+"+driver.getSessionId());
     }
 
     @AfterTest
