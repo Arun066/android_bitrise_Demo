@@ -30,7 +30,7 @@ public class FirstAndroidTest {
         caps.setCapability("deviceName", "emulator-5554");
        // caps.setCapability("app", "C:\\Users\\user\\AndroidStudioProjects\\MyApplication\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
        // caps.setCapability("app", System.getProperty("user.dir")+"//src//test//resources//app//sampleBitrise.apk");
-        caps.setCapability("app", System.getenv("BITRISE_APK_PATH"));
+       // caps.setCapability("app", System.getenv("BITRISE_APK_PATH"));
         driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps);
     }
 
