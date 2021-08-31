@@ -23,7 +23,7 @@ public class FirstAndroidTest {
     @BeforeTest
     public void setUp() throws MalformedURLException {
 
-        //System.out.println("xxxxxxxx   "+System.getProperty("user.dir")+"\\src\\test\\resources\\app\\sampleBitrise.apk");
+        System.out.println("xxxxxxxx   "+System.getProperty("user.dir")+"//src//test//resources//app//sampleBitrise.apk");
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
         caps.setCapability("automationName", "UiAutomator2");
