@@ -2,6 +2,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,27 +30,36 @@ public class FirstAndroidTest {
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("platformVersion", "10.0");
         caps.setCapability("deviceName", "emulator-5554");
-       // caps.setCapability("app", "C:\\Users\\user\\AndroidStudioProjects\\MyApplication\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
-       // caps.setCapability("app", System.getProperty("user.dir")+"//src//test//resources//app//sampleBitrise.apk");
+        caps.setCapability("app", System.getProperty("user.dir")+"//src//test//resources//app//sampleBitrise.apk");
        // caps.setCapability("app", System.getenv("BITRISE_APK_PATH"));
         driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps);
+
     }
 
-    @Test
+    public WebElement waitForVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.ignoring(ElementNotVisibleException.class);
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public boolean isWebElementVisible(By locator) {
+        try {
+            WebElement elm = waitForVisible(locator);
+            return elm.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    @Test(priority = 1,description = "validate Hello World! text")
     public void test1() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        System.out.println("Session Id1 :+"+driver.getSessionId());
+        Assert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello World!']")), "Hello World! does not displayed");
     }
 
-    @Test
+    @Test(priority = 2,description = "validate Hello text")
     public void test2() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        System.out.println("Session Id2 :+"+driver.getSessionId());
-    }
-    @Test
-    public void test3() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        System.out.println("Session Id3 :+"+driver.getSessionId());
+        Assert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello World']")), "Hello does not displayed");
     }
 
     @AfterTest
