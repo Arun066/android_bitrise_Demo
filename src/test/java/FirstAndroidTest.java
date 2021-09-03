@@ -59,7 +59,7 @@ public class FirstAndroidTest {
 
     @Test(priority = 2,description = "validate Hello text")
     public void test2() {
-        Assert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello World']")), "Hello does not displayed");
+        Assert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello']")), "Hello does not displayed");
     }
 
     @AfterTest
