@@ -11,7 +11,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -37,7 +39,7 @@ public class FirstAndroidTest {
     }
 
     public WebElement waitForVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.ignoring(ElementNotVisibleException.class);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
@@ -51,15 +53,21 @@ public class FirstAndroidTest {
         }
 
     }
-
+    SoftAssert softAssert=new SoftAssert();
     @Test(priority = 1,description = "validate Hello World! text")
-    public void test1() {
-        Assert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello World!']")), "Hello World! does not displayed");
+    public void test1(Method method) {
+        softAssert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello World!']")), "Hello World! does not displayed");
+        String methodName=method.getName();
+        System.out.println(methodName+ " : Pass");
+        softAssert.assertAll();
     }
 
     @Test(priority = 2,description = "validate Hello text")
-    public void test2() {
-        Assert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello']")), "Hello does not displayed");
+    public void test2(Method method) {
+        softAssert.assertTrue(isWebElementVisible(By.xpath("//*[@text='Hello']")), "Hello does not displayed");
+        String methodName=method.getName();
+        System.out.println(methodName+ " : Fail");
+        softAssert.assertAll();
     }
 
     @AfterTest
